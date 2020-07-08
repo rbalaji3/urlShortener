@@ -1,0 +1,61 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Rishikesh Title </title>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="title"> Rishikesh Page </h1>
+    </header>
+    <main id="vapp">
+        <form class="form" v-if="formVisible" @submit.prevent="createUrl()">
+            <!-- <div v-if="error" class="error">
+              {{error}}
+            </div> -->
+            <input class="input" type="text" v-model="url" name="url" id="url" placeholder="enter a url">
+            <input class="input" type="text" v-model="alias" name="slug" id="alias" placeholder="enter a alias">
+            <button type="submit" class="create">create</button>
+          </form>
+        <div v-if="created">
+            <p class="created">{{created}}</p>
+        </div>
+    </main>
+    
+    <script>   
+        const vueApp = new Vue({
+            el: '#vapp',
+            data: { 
+                url: '',
+                alias: '',
+                error: '',
+                formVisible: true,
+                created: null
+            },
+            methods: {
+                async createUrl() {
+                    console.log(this.url, this.alias);
+                    const response = await fetch('/url', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            url: this.url,
+                            alias: this.alias || undefined,
+                        }),
+                    });
+                    this.created = await response.json();
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
