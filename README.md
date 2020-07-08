@@ -20,3 +20,8 @@ How it was Made:
     - Express
     - Vue.js
     - MongoDB
+
+
+This application is not currently live.
+To run:
+	- npm run dev
