@@ -1,4 +1,4 @@
-# urlShortner
+# urlShortener
 
 
 Application built with Node.js, Vue.js and MongoDB to act as a URL shortner. 
